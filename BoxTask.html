@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOGO Offer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      width: 320px;
+      border: 2px solid #f4f4f4;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    .heading-divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .heading-divider::before,
+    .heading-divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid #ccc;
+    }
+    .heading-divider:not(:empty)::before {
+      margin-right: .75em;
+    }
+    .heading-divider:not(:empty)::after {
+      margin-left: .75em;
+    }
+    .heading-divider span {
+      color: #ff4d88;
+      font-weight: bold;
+    }
+    .box {
+      border: 1px solid #f4f4f4;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      padding: 10px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .most-popular {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background-color: #ff4d88;
+      color: #fff;
+      font-size: 10px;
+      padding: 3px 6px;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+    .box input[type="radio"] {
+      margin-right: 10px;
+    }
+    .label {
+      font-weight: bold;
+    }
+    .discount {
+      background-color: #ff4d88;
+      color: #fff;
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      margin-left: 5px;
+    }
+    .price {
+      float: right;
+    }
+    .price del {
+      color: gray;
+      margin-left: 5px;
+      font-size: 0.85em;
+    }
+    .details {
+      margin-top: 10px;
+      display: none;
+    }
+    .details select {
+      width: 48%;
+      padding: 5px;
+      margin-bottom: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .active .details {
+      display: block;
+    }
+    .free-delivery {
+      color: #ff4d88;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+    .total {
+      text-align: right;
+      margin-top: 5px;
+      font-weight: bold;
+    }
+    .add-to-cart {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      text-align: center;
+      background-color: #ff4d88;
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    .powered-by {
+      text-align: center;
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="heading-divider"><span>YAY! It's BOGO</span></div>
+
+    <div class="box" id="box1">
+      <label><input type="radio" name="offer" onclick="selectBox(1)">1 Unit <span class="discount">10% Off</span><span class="price">$10.00 <del>$24.00</del></span></label>
+      <div class="details">
+        <select><option>S</option><option>M</option><option>L</option></select>
+        <select><option>Black</option><option>Red</option><option>Blue</option></select>
+      </div>
+    </div>
+
+    <div class="box" id="box2">
+      <div class="most-popular">MOST POPULAR</div>
+      <label><input type="radio" name="offer" onclick="selectBox(2)">2 Unit <span class="discount">20% Off</span><span class="price">$18.00 <del>$24.00</del></span></label>
+      <div class="details">
+        <select><option>S</option><option>M</option><option>L</option></select>
+        <select><option>Black</option><option>Red</option><option>Blue</option></select><br>
+        <select><option>S</option><option>M</option><option>L</option></select>
+        <select><option>Black</option><option>Red</option><option>Blue</option></select>
+      </div>
+    </div>
+
+    <div class="box" id="box3">
+      <label><input type="radio" name="offer" onclick="selectBox(3)">3 Unit <span class="discount">30% Off</span><span class="price">$24.00 <del>$24.00</del></span></label>
+      <div class="details">
+        <select><option>S</option><option>M</option><option>L</option></select>
+        <select><option>Black</option><option>Red</option><option>Blue</option></select><br>
+        <select><option>S</option><option>M</option><option>L</option></select>
+        <select><option>Black</option><option>Red</option><option>Blue</option></select><br>
+        <select><option>S</option><option>M</option><option>L</option></select>
+        <select><option>Black</option><option>Red</option><option>Blue</option></select>
+      </div>
+    </div>
+
+    <div class="free-delivery">Free Delivery</div>
+    <div class="total">Total: $<span id="totalPrice">0.00</span></div>
+
+    <button class="add-to-cart">+ Add to Cart</button>
+    <div class="powered-by">@ Powered by Pumper</div>
+  </div>
+
+  <script>
+    function selectBox(num) {
+      for (let i = 1; i <= 3; i++) {
+        const box = document.getElementById(`box${i}`);
+        if (i === num) {
+          box.classList.add("active");
+        } else {
+          box.classList.remove("active");
+        }
+      }
+
+      const prices = {
+        1: 10.00,
+        2: 18.00,
+        3: 24.00
+      };
+      document.getElementById("totalPrice").textContent = prices[num].toFixed(2);
+    }
+  </script>
+</body>
+</html>
